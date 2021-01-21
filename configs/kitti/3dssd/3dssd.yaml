@@ -6,7 +6,7 @@ DATASET:
     BASE_DIR_PATH: 'dataset/KITTI/object'                                                                     
     TRAIN_LIST: 'dataset/KITTI/object/train.txt'                                                              
     VAL_LIST: 'dataset/KITTI/object/val.txt'                                                                  
-    SAVE_NUMPY_PATH: 'dataset/3DSSD/data/KITTI'
+    SAVE_NUMPY_PATH: 'data/KITTI'
 TRAIN:
   AUGMENTATIONS:
     OPEN: True
