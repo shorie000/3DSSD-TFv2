@@ -1,30 +1,4 @@
-# 3DSSD-TFv2
-[3DSSD](https://github.com/Jia-Research-Lab/3DSSD)'s implementation with TensorFlow v2.
-
-
-## Dockerfile
-Build and run dockerfile.
-You must mount KITTI dataset directory.
-
-```
-sudo docker build . -t 3dssd-tfv2 --no-cache
-sudo docker run --gpus all --rm --name 3dssd-tfv2 --shm-size=4048m -v /path/to/KITTI dataset:/root/3DSSD-TFv2/dataset  -it 3dssd-tfv2 /bin/bash
-```
-
-Prepare dataset.
-```
-cd 3DSSD-TFv2
-python lib/core/data_preprocessor.py --cfg configs/kitti/3dssd/3dssd.yaml --split training --img_list train
-
-python lib/core/data_preprocessor.py --cfg configs/kitti/3dssd/3dssd.yaml --split training --img_list val
-
-python lib/core/data_preprocessor.py --cfg configs/kitti/3dssd/3dssd.yaml --split testing --img_list test
-```
-Training a model and evaluate it.
-```
-python lib/core/trainer.py --cfg configs/kitti/3dssd/3dssd.yaml
-python lib/core/evaluator.py --cfg configs/kitti/3dssd/3dssd.yaml --restore_model_path /path/to/weight
-```
+# 3DSSD 
 
 ## Point-based 3D Single Stage Object Detector (CVPR 2020 Oral)
 
@@ -49,10 +23,10 @@ Currently, there have been many kinds of voxel-based 3D single stage detectors, 
 
 ### Requirements
 All the codes are tested in the following environment:
-* Ubuntu 18.04
+* Ubuntu 16.04
 * Python 3.6
-* tensorflow 2.3.0
-* CUDA 10.1 & CuDNN 7.6.5
+* tensorflow 1.4.0
+* CUDA 9.0 & CuDNN 7.0.0
 
 ### Performance and Model Zoo
 
@@ -91,8 +65,8 @@ Some pretrained models including 3DSSD and PointRCNN are listed below with their
 
 (1) Clone this repository.
 ```
-git clone https://github.com/shuto-keio/3DSSD-TFv2
-cd 3DSSD-TFv2
+git clone https://github.com/tomztyang/3DSSD
+cd 3DSSD
 ```
 
 (2) Setup Python environment.
@@ -100,10 +74,14 @@ cd 3DSSD-TFv2
 conda create -n 3dssd python=3.6
 source activate 3dssd
 pip install -r requirements.txt
-pip install tensorflow-gpu==2.3.0
 ```
 
-(3) Compile and install 3DSSD library. Note that only GCC no later than version 5.0 can compile CUDA-10.1 code, make sure you install gcc-5. 
+Download and install tensorflow-1.4.0 [here](https://drive.google.com/file/d/142fwmiq8skVUcEqxXny9zA4bNG7YULGn/view?usp=sharing) which is compiled with CUDA-9.0 and CuDNN-7.0.0.
+```
+pip install tensorflow-1.4.0-cp36-cp36m-linux_x86_64.whl
+```
+
+(3) Compile and install 3DSSD library. Note that only GCC no later than version 5.0 can compile CUDA-9.0 code, make sure you install gcc-5. 
 ```
 bash compile_all.sh /path/to/tensorflow /path/to/cuda
 ```
@@ -111,7 +89,7 @@ bash compile_all.sh /path/to/tensorflow /path/to/cuda
 (4) Add **3DSSD/lib** to PYTHONPATH.
 
 ```
-export PYTHONPATH=$PYTHONPATH:/path/to/3DSSD-TFv2/lib:/path/to/3DSSD-TFv2/mayavi
+export PYTHONPATH=$PYTHONPATH:/path/to/3DSSD/lib:/path/to/3DSSD/mayavi
 ```
 
 ### Data Preparation
