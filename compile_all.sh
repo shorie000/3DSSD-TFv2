@@ -5,7 +5,7 @@ OPSPATH="lib/utils/tf_ops"
 
 # voxel operation
 cd lib/builder/voxel_generator
-./build.sh
+bash build.sh
 cd dist
 pip install points2voxel-0.0.1-cp36-cp36m-linux_x86_64.whl
 cd ../../../..
@@ -46,5 +46,5 @@ cd ..
 
 # nms
 cd nms
-./build.sh
+bash build.sh
 cd ..
