@@ -3,10 +3,10 @@ DATASET:
   POINT_CLOUD_RANGE: (-40, 40, -5, 3, 0, 70)
   KITTI:
     CLS_LIST: ('Car', )                                                                                                                
-    BASE_DIR_PATH: './dataset/KITTI/object'                                                                     
-    TRAIN_LIST: './dataset/KITTI/object/train.txt'                                                              
-    VAL_LIST: './dataset/KITTI/object/val.txt'                                                                  
-    SAVE_NUMPY_PATH: './dataset/3DSSD/data/KITTI'
+    BASE_DIR_PATH: 'dataset/KITTI/object'                                                                     
+    TRAIN_LIST: 'dataset/KITTI/object/train.txt'                                                              
+    VAL_LIST: 'dataset/KITTI/object/val.txt'                                                                  
+    SAVE_NUMPY_PATH: 'dataset/3DSSD/data/KITTI'
 TRAIN:
   AUGMENTATIONS:
     OPEN: True
