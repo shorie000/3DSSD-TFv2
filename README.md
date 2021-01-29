@@ -23,7 +23,10 @@ python lib/core/data_preprocessor.py --cfg configs/kitti/3dssd/3dssd.yaml --spli
 Training a model and evaluate it.
 ```
 python lib/core/trainer.py --cfg configs/kitti/3dssd/3dssd.yaml
+
 python lib/core/evaluator.py --cfg configs/kitti/3dssd/3dssd.yaml --restore_model_path /path/to/weight
+
+python lib/core/tester.py --cfg configs/kitti/3dssd/3dssd.yaml --restore_model_path /path/to/weight
 ```
 
 ## Point-based 3D Single Stage Object Detector (CVPR 2020 Oral)
