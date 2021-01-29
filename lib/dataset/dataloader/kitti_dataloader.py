@@ -527,7 +527,7 @@ class KittiDataset(Dataset):
 
     # Save predictions
 
-    def save_predictions(self, sess, feeddict_producer, pred_list, val_size, cls_thresh, log_dir, placeholders=None):
+    def save_predictions(self, feeddict_producer, model, val_size, cls_thresh, log_dir):
         obj_detection_list = []
         obj_detection_num = []
         obj_detection_name = []
@@ -537,8 +537,17 @@ class KittiDataset(Dataset):
         for i in tqdm.tqdm(range(val_size)):
             feed_dict = feeddict_producer.create_feed_dict()
 
-            pred_bbox_3d_op, pred_cls_score_op, pred_cls_category_op = sess.run(
-                pred_list, feed_dict=feed_dict)
+            output = model.model_forward(feed_dict)
+
+            pred_bbox_3d_op = tf.squeeze(
+                output[maps_dict.PRED_3D_BBOX][-1], axis=0).numpy()
+            pred_cls_score_op = tf.squeeze(
+                output[maps_dict.PRED_3D_SCORE][-1], axis=0).numpy()
+            pred_cls_category_op = tf.squeeze(
+                output[maps_dict.PRED_3D_CLS_CATEGORY][-1], axis=0).numpy()
+
+            # pred_bbox_3d_op, pred_cls_score_op, pred_cls_category_op = sess.run(
+            #     pred_list, feed_dict=feed_dict)
 
             calib_P, sample_name = feeddict_producer.info
             sample_name = int(sample_name[0])
@@ -569,3 +578,4 @@ class KittiDataset(Dataset):
                     fid.write('%0.9f\n' % float(pred_cls_score_op[idx]))
 
         return
+
